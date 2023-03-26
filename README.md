@@ -29,9 +29,13 @@ tl;dr: Export relevant env vars, and AWS creds before running the scripts to get
 This Docker Compose file includes five services:
 
 `localstack`: Runs LocalStack and exposes the Kinesis, S3, and Glue APIs on ports 4566, 4572, and 8080, respectively.
+
 `terraform`: Builds a Docker image that runs Terraform and configures it to use LocalStack as the backend. You can mount your Terraform code to the /app directory in this container.
+
 `glue-job`: Builds a Docker image that runs an AWS Glue job that reads data from Kinesis and writes it to S3. You can mount your Glue job script to the /app directory in this container.
+
 `s3`: Uses the Amazon CLI to create an S3 bucket named "test-bucket".
+
 `kinesis`: Uses the Amazon CLI to create a Kinesis stream named "test-stream" with one shard.
 
 To use this Docker Compose file, create a directory with a subdirectory named terraform that contains your Terraform code and a subdirectory named glue-job that contains your Glue job script. 

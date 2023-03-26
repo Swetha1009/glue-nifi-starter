@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+      - "8080:8080"
+    environment:
+      - SERVICES=kinesis,s3,glue
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - LAMBDA_EXECUTOR=docker
+      - KINESIS_ERROR_PROBABILITY=0.1
+      - KINESIS_SHARD_LIMIT=100
+      - KINESIS_INITIAL_POSITION_IN_STREAM=LATEST
+
+  terraform:
+    build: ./terraform
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+      TERRAFORM_BACKEND_CONFIG: "bucket=test-bucket"
+
+  glue-job:
+    build: ./glue-job
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+      S3_BUCKET_NAME: test-bucket
+      KINESIS_STREAM_NAME: test-stream
+      GLUE_JOB_NAME: test-job
+
+  s3:
+    image: amazon/aws-cli
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+    command: ["s3api", "create-bucket", "--bucket", "test-bucket"]
+
+  kinesis:
+    image: amazon/aws-cli
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+    command: ["kinesis", "create-stream", "--stream-name", "test-stream", "--shard-count", "1"]

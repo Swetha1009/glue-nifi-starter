@@ -1,7 +1,8 @@
 # glue-nifi-starter
 
-Just a starter project to teach new developers AWS GLUE, nifi and AWS / IaC.
+Just a starter project to teach new developers AWS GLUE, Apache Nifi and AWS, IaC with Terraform - and industry best practices with local testing using localstack and pre-commit based linters.
 
+```bash
 .
 ├── README.md
 ├── docker-compose.yml
@@ -12,6 +13,7 @@ Just a starter project to teach new developers AWS GLUE, nifi and AWS / IaC.
     ├── kinesis.tf
     ├── main.tf
     └── vars.tf
+```
 
 - Terraform folder has sample code that can be used to bootstrap glue, AWS S3 and AWS Kinesis infra.
     - This code creates a Kinesis stream named "example-stream", an IAM policy that allows AWS Glue to write to the stream, and an IAM role for AWS Glue that can assume the policy. It also creates a Glue connection that uses the Kinesis stream as its source. You can modify the region variable to specify the AWS region where you want to create the resources. More on that later.

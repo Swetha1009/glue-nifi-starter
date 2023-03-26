@@ -1,0 +1,2 @@
+awsglue
+boto3

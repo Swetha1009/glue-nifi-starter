@@ -52,9 +52,15 @@ Note: Make sure to use the IAM account and not the root account credentials!
 This precommit file sets up pre-commit hooks for Terraform and GLUE code.
 
 `pre-commit-terraform`: Adds hooks for Terraform code formatting (terraform_fmt), validation (terraform_validate), documentation generation (terraform_docs), static analysis (terraform_tflint and terraform_tfsec), and policy enforcement (terraform_checkov).
-`black`: Formats Python code according to PEP 8 style guide.
-`mypy`: Performs static type checking for Python code.
-`pre-commit-hooks`: Includes a variety of hooks that check for issues like trailing whitespace, end-of-file issues, YAML syntax errors, large files, merge conflicts, debug statements, and Python code quality (flake8, isort, and bandit).
-To use this pre-commit configuration, you'll need to have pre-commit installed. 
 
-Once you have pre-commit installed, you can run pre-commit install in your repository to install the hooks defined in .pre-commit-config.yaml. After that, pre-commit will automatically run the configured hooks whenever you make a commit, helping to ensure that your code is consistently formatted and free of errors.
+`black`: Formats Python code according to PEP 8 style guide.
+
+`mypy`: Performs static type checking for Python code.
+
+`pre-commit-hooks`: Includes a variety of hooks that check for issues like trailing whitespace, end-of-file issues, YAML syntax errors, large files, merge conflicts, debug statements, and Python code quality (flake8, isort, and bandit).
+
+To use this pre-commit configuration, you'll need to have [pre-commit](https://pre-commit.com/) installed. 
+
+Once you have pre-commit installed, you can run pre-commit install in your repository to install the hooks defined in .pre-commit-config.yaml. 
+
+After that, pre-commit will automatically run the configured hooks whenever you make a commit, helping to ensure that your code is consistently formatted and free of errors.
